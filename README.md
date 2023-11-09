@@ -1,6 +1,6 @@
 # Spectroscopy
 Got the spectroscopy data from scanning 
 
-# client Desktop
+# Client Desktop
 # Table 1
 # Table 2
