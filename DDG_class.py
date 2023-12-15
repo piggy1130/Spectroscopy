@@ -93,7 +93,14 @@ class DDG:
         self.DDG_Initialization()
 
     def DDG_Initialization(self, info_dict):
-
+        # ****************************************************************
+        # channel A - Nd: YAG flashlamp
+        # state on
         self.channels[1].set_state("ON", self.connection, info_dict)
-        # ... Rest of the initialization ...
-
+        # channel A SYNC channel B   
+        self.channels[1].set_sync_channel("CHB", self.connection, info_dict)
+        # set channel A delay: -135e-6 (-135um)    
+        self.channels[1].set_delay("-135e-6", self.connection, info_dict)
+        # set channel A width to 10e-6    
+        self.channels[1].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
