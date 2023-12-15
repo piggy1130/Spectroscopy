@@ -92,6 +92,9 @@ class DDG:
         }
         self.DDG_Initialization()
 
+    # channel 1 & 2 ON
+    # channel 3 & 5 & 6 & 7 & 8 OFF
+    # channel 4(D) - nothing 
     def DDG_Initialization(self, info_dict):
         # ****************************************************************
         # channel A - Nd: YAG flashlamp
@@ -104,3 +107,88 @@ class DDG:
         # set channel A width to 10e-6    
         self.channels[1].set_width("10e-6", self.connection, info_dict)
         # ****************************************************************
+        # channel B - Nd: YAG Q-switch
+        # state on
+        self.channels[2].set_state("ON", self.connection, info_dict)
+        # channel B SYNC channel F
+        self.channels[2].set_sync_channel("CHF", self.connection, info_dict)
+        # set channel B delay: 470e-6 
+        self.channels[2].set_delay("470e-6", self.connection, info_dict)
+        # set channel B width to 10e-6
+        self.channels[2].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel C - Scope trigger
+        # state on
+        self.channels[3].set_state("OFF", self.connection, info_dict)
+        # channel C SYNC channel B
+        self.channels[3].set_sync_channel("CHB", self.connection, info_dict)
+        # set channel C delay: 0
+        self.channels[3].set_delay("0", self.connection, info_dict)
+        # set channel C width to 10e-6
+        self.channels[3].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel D - NOTHING RIGHT NOW
+        # state on
+        self.channels[4].set_state("OFF", self.connection, info_dict)
+        # channel C SYNC channel B
+        self.channels[4].set_sync_channel("CHB", self.connection, info_dict)
+        # set channel C delay: 0
+        self.channels[4].set_delay("0", self.connection, info_dict)
+        # set channel C width to 10e-6
+        self.channels[4].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel E - ablation flashlamp
+        # state off
+        self.channels[5].set_state("OFF", self.connection, info_dict)
+        # channel E SYNC channel T0
+        self.channels[5].set_sync_channel("T0", self.connection, info_dict)
+        # set channel E delay: 10e-3 
+        self.channels[5].set_delay("10e-3", self.connection, info_dict)
+        # set channel E width to 10e-6
+        self.channels[5].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel F - ablation Q-switch
+        # state off
+        self.channels[6].set_state("OFF", self.connection, info_dict)
+        # channel F SYNC channel E
+        self.channels[6].set_sync_channel("CHE", self.connection, info_dict)
+        # set channel F delay: 110e-6 
+        self.channels[6].set_delay("110e-6", self.connection, info_dict)
+        # set channel F width to 10e-6
+        self.channels[6].set_width("10e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel G - nozzle
+        # state oFF
+        self.channels[7].set_state("OFF", self.connection, info_dict)
+        self.channels[7].set_sync_channel("CHF", self.connection, info_dict)
+        self.channels[7].set_delay("-460e-6", self.connection, info_dict)
+        self.channels[7].set_width("250e-6", self.connection, info_dict)
+        # ****************************************************************
+        # channel H - PMT switch
+        self.channels[8].set_state("OFF", self.connection, info_dict)
+        self.channels[8].set_sync_channel("CHB", self.connection, info_dict)
+        self.channels[8].set_delay("-680e-9", self.connection, info_dict)
+        self.channels[8].set_width("1e-6", self.connection, info_dict)
+
+    # All channel ON 
+    def DDG_Start(self, info_dict):
+        self.channels[3].set_state("ON", self.connection, info_dict)
+        self.channels[5].set_state("ON", self.connection, info_dict)
+        self.channels[6].set_state("ON", self.connection, info_dict)
+        self.channels[7].set_state("ON", self.connection, info_dict)
+        self.channels[8].set_state("ON", self.connection, info_dict)
+
+    # channel 1 & 2 ON
+    # channel 3 & 5 & 6 & 7 & 8 OFF
+    def DDG_End(self, info_dict):
+        self.channels[3].set_state("OFF", self.connection, info_dict)
+        self.channels[5].set_state("OFF", self.connection, info_dict)
+        self.channels[6].set_state("OFF", self.connection, info_dict)
+        self.channels[7].set_state("OFF", self.connection, info_dict)
+        self.channels[8].set_state("OFF", self.connection, info_dict)
+
+
+# Usage example
+# ddg = DDG()
+# ddg.channels[1].set_state("ON", ddg.connection, info_dict)
+        
