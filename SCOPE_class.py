@@ -125,3 +125,4 @@ class SCOPE:
 
     def SCOPE_BackToNormalMode(self):
         self.connection.write("HORizontal:FASTframe:STATE OFF") # get the scope back to the normal mode
+
