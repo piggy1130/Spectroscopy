@@ -2,29 +2,36 @@
 Got the spectroscopy data from scanning 
 
 ### Client Desktop use GUI
-## Table 1 (Linux) - DDG, SCOPE, DYE-LASER, SHUTTER & DATABASE
-## Table 2 (Windows) - WAVEMETER
+### Table 1 (Linux) - DDG, SCOPE, DYE-LASER, SHUTTER & DATABASE
+### Table 2 (Windows) - WAVEMETER
 
-# The Overall Structure
+## The Overall Structure
 1. We use GUI to talk to "Table 1" only.
 2. "Table 1" talks to "Table 2" for any work that needs to be done related to "Table 2"
 
-# Running Process
-1. Start the "Table 2" python file first since it also works as the server for "Table 1"
-2. Start the "Table 1" python file
-   
-1. Start the “Server Program” in Table2_windows
-    “server_table2(Windows)_WAVEMETER_1030”
-    Note: we use table_1 to communicate with table_2. In this communication, table_1 works as the client and table_2 works as the server. We need to start the server before the client.
-With this communication, the master client only needs to talk to table_1.
-“server_table2(Windows)_WAVEMETER_1030”
-(needs the head file “wlm.py”)
+## Running Process
+1. Start the "Table 2" python file (as server) first since it also works as the server for "Table 1"
+2. Start the "Table 1" python file (as server)
+3. run GUI python file
 
-2. Start the “Server Program” in Table1_linux
-“server_table1(linux)_DDG_SCOPE_LASER_SHUTTER_1030”
+## In GUI:
+When we send messages to the server, we need to confirm the task is done before we send another task. The function to check it is:
+def send_message_to_server(self, table_connection, message, confirmation)
+In this function, we have "message" which is the msg we send to devices & "confirmation" message as the feedback from the device to confirm that the work has been done!
 
-3. Start to send requests from Client Windows Desktop
-“Client_Wavelength_Scan_ReadToUse_1030”
-
+## Message Format
+### Arduino:
+message = "SHUTTER >> 2_on"
+confirmation = "WAVEMETER_SHUTTER_ON"
+message = "SHUTTER >> 2_off"
+confirmation = "WAVEMETER_SHUTTER_OFF"
+message = "SHUTTER >> 3_on"
+confirmation = "VIS_SHUTTER_ON"
+message = "SHUTTER >> 3_off"
+confirmation = "VIS_SHUTTER_OFF"
+message = "SHUTTER >> 4_on"
+confirmation = "UV_SHUTTER_ON"
+message = "SHUTTER >> 4_off"
+confirmation = "UV_SHUTTER_OFF"
 
 
