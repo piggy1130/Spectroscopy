@@ -34,5 +34,10 @@ confirmation = "UV_SHUTTER_ON"
 message = "SHUTTER >> 4_off"  
 confirmation = "UV_SHUTTER_OFF"  
 
+### DDG:
+the client sends a message: "DDG >> start"
+server responses message: "DDG_START"
+the client sends a message: "DDG >> end"
+server responses message: "DDG_END"
 
 
