@@ -19,8 +19,8 @@ When we send messages to the server, we need to confirm the task is done before 
 def send_message_to_server(self, table_connection, message, confirmation)
 In this function, we have "message" which is the msg we send to devices & "confirmation" message as the feedback from the device to confirm that the work has been done!
 
-## Message Format
 ### Arduino:
+#### Message Examples:
 message = "SHUTTER >> 2_on"  
 confirmation = "WAVEMETER_SHUTTER_ON"  
 message = "SHUTTER >> 2_off"  
@@ -34,10 +34,19 @@ confirmation = "UV_SHUTTER_ON"
 message = "SHUTTER >> 4_off"  
 confirmation = "UV_SHUTTER_OFF"  
 
-### DDG:
-the client sends a message: "DDG >> start"
-server responses message: "DDG_START"
-the client sends a message: "DDG >> end"
-server responses message: "DDG_END"
+### DDG (8 channels):
+1. set_state(self, state_status, connection, info_dict)  
+2. set_delay(self, delay_value, connection, info_dict)  
+3. set_sync_channel(self, channel, connection, info_dict)  
+4. set_width(self, width_val, connection, info_dict)  
+#### Message Examples:
+the client sends a message: "DDG >> start"  
+server responses message: "DDG_START"  
+the client sends a message: "DDG >> end"  
+server responses message: "DDG_END"  
+#### Right now, there are 4 functions related to DDG
+the client sends a message: "DDG >> 7, delay, -520e-6" (channel NO., action, value)  
+server responses message: "DDG_DONE"  
+
 
 
