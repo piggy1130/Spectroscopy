@@ -1,7 +1,7 @@
 # Spectroscopy
 Got the spectroscopy data from scanning 
 
-## Client Desktop use GUI
+### Client Desktop use GUI
 ## Table 1 (Linux) - DDG, SCOPE, DYE-LASER, SHUTTER & DATABASE
 ## Table 2 (Windows) - WAVEMETER
 
