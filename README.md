@@ -21,10 +21,10 @@ In this function, we have "message" which is the msg we send to devices & "confi
 
 ## Message Format
 ### Arduino:
-message = "SHUTTER >> 2_on"
-confirmation = "WAVEMETER_SHUTTER_ON"
-message = "SHUTTER >> 2_off"
-confirmation = "WAVEMETER_SHUTTER_OFF"
+message = "SHUTTER >> 2_on"  
+confirmation = "WAVEMETER_SHUTTER_ON"  
+message = "SHUTTER >> 2_off"  
+confirmation = "WAVEMETER_SHUTTER_OFF"  
 message = "SHUTTER >> 3_on"
 confirmation = "VIS_SHUTTER_ON"
 message = "SHUTTER >> 3_off"
