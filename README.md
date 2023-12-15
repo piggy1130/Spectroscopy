@@ -44,7 +44,6 @@ the client sends a message: "DDG >> start"
 server responses message: "DDG_START"  
 the client sends a message: "DDG >> end"  
 server responses message: "DDG_END"  
-#### Right now, there are 4 functions related to DDG
 the client sends a message: "DDG >> 7, delay, -520e-6" (channel NO., action, value)  
 server responses message: "DDG_DONE"  
 
