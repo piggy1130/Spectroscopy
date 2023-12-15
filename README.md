@@ -47,5 +47,11 @@ server responses message: "DDG_END"
 the client sends a message: "DDG >> 7, delay, -520e-6" (channel NO., action, value)  
 server responses message: "DDG_DONE"  
 
+### Scope (4 channels):
+#### Message Examples:
+client message: "Scope >> getData"  
+server response: "SCOPE_DATA_DONE"  
+client message: "Scope >> BackToNormalMode"  
+server response: "SCOPE_NORMAL_MODE"  
 
 
