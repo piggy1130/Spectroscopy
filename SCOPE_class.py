@@ -2,7 +2,6 @@ import serial
 import vxi11
 import time
 
-
 class BaseSCOPEChannel:
     def __init__(self, channel_number):
         self.channel_number = channel_number
