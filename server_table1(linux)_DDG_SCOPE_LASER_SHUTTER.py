@@ -15,6 +15,7 @@ from wlm import *
 from SCOPE_class import *
 from DYE_LASER import Dye_Laser
 from SHUTTER_class import SHUTTER
+from DDG_class import *
 
 
 BUFFER_SIZE = 1024
@@ -45,384 +46,6 @@ def send_message_to_server(table_connection, message, confirmation):
     Check_Work_Done(table_connection,confirmation)
 
 
-
-class DDG_channel_1:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_1.state"] = state_status
-        # msg = ":PULSE1:STAT ON\r\n"
-        msg = ":PULSE1:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_1.delay"] = delay_value
-        # msg = ":PULSE1:DEL -135e-6\r\n"
-        msg = ":PULSE1:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_1.sync_channel"] = channel
-        # msg = ":PULSE1:SYNC CHB\r\n"
-        msg = ":PULSE1:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_1.width"] = width_val
-        # msg = ":PULSE1:WIDT 10e-6\r\n"
-        msg = ":PULSE1:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_2:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_2.state"] = state_status
-        msg = ":PULSE2:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_2.delay"] = delay_value
-        msg = ":PULSE2:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_2.sync_channel"] = channel
-        msg = ":PULSE2:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_2.width"] = width_val
-        msg = ":PULSE2:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_3:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_3.state"] = state_status
-        msg = ":PULSE3:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_3.delay"] = delay_value
-        msg = ":PULSE3:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_3.sync_channel"] = channel
-        msg = ":PULSE3:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_3.width"] = width_val
-        msg = ":PULSE3:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_4:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_4.state"] = state_status
-        msg = ":PULSE4:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_4.delay"] = delay_value
-        msg = ":PULSE4:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_4.sync_channel"] = channel
-        msg = ":PULSE4:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_4.width"] = width_val
-        msg = ":PULSE4:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_5:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_5.state"] = state_status
-        msg = ":PULSE5:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_5.delay"] = delay_value
-        msg = ":PULSE5:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_5.sync_channel"] = channel
-        msg = ":PULSE5:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_5.width"] = width_val
-        msg = ":PULSE5:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_6:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_6.state"] = state_status
-        msg = ":PULSE6:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_6.delay"] = delay_value
-        msg = ":PULSE6:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_6.sync_channel"] = channel
-        msg = ":PULSE6:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_6.width"] = width_val
-        msg = ":PULSE6:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_7:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_7.state"] = state_status
-        msg = ":PULSE7:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_7.delay"] = delay_value
-        msg = ":PULSE7:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_7.sync_channel"] = channel
-        msg = ":PULSE7:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_7.width"] = width_val
-        msg = ":PULSE7:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG_channel_8:
-    def set_state (self, state_status):
-        self.state = state_status
-        info_dict["DDG_channel_8.state"] = state_status
-        msg = ":PULSE8:STAT " + state_status + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_delay (self, delay_value):
-        self.delay = delay_value
-        info_dict["DDG_channel_8.delay"] = delay_value
-        msg = ":PULSE8:DEL " + delay_value + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_sync_channel (self, channel):
-        self.sync_channel = channel
-        info_dict["DDG_channel_8.sync_channel"] = channel
-        msg = ":PULSE8:SYNC " + channel + "\r\n"
-        DDG.connection.write(str.encode(msg))        
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-    def set_width (self, width_val):
-        self.width = width_val
-        info_dict["DDG_channel_8.width"] = width_val
-        msg = ":PULSE8:WIDT " + width_val + "\r\n"
-        DDG.connection.write(str.encode(msg))
-        #after successfully setup, we could read msg b'ok\r\n'
-        DDG.connection.readline()
-
-class DDG:
-    connection = serial.Serial('/dev/ttyUSB0', 115200)
-    def __init__(self):
-        self.DDG_channel_1 = DDG_channel_1()
-        self.DDG_channel_2 = DDG_channel_2()
-        self.DDG_channel_3 = DDG_channel_3()
-        self.DDG_channel_4 = DDG_channel_4()
-        self.DDG_channel_5 = DDG_channel_5()
-        self.DDG_channel_6 = DDG_channel_6()
-        self.DDG_channel_7 = DDG_channel_7()
-        self.DDG_channel_8 = DDG_channel_8()
-        self.DDG_Initialization()
-    
-    # channel 1 & 2 ON
-    # channel 3 & 5 & 6 & 7 & 8 OFF
-    # channel 4(D) - nothing 
-    def DDG_Initialization(self):
-        # Declare the dictionary as global, not create a new local one
-        global info_dict 
-        # ****************************************************************
-        # channel A - Nd: YAG flashlamp
-        # state on
-        self.DDG_channel_1.set_state("ON")
-        # channel A SYNC channel B   
-        self.DDG_channel_1.set_sync_channel("CHB")
-        # set channel A delay: -135e-6 (-135um)    
-        self.DDG_channel_1.set_delay("-135e-6")
-        # set channel A width to 10e-6    
-        self.DDG_channel_1.set_width("10e-6")
-        # ****************************************************************
-        # channel B - Nd: YAG Q-switch
-        # state on
-        self.DDG_channel_2.set_state("ON")
-        # channel B SYNC channel F
-        self.DDG_channel_2.set_sync_channel("CHF")
-        # set channel B delay: 470e-6 
-        self.DDG_channel_2.set_delay("470e-6")
-        # set channel B width to 10e-6
-        self.DDG_channel_2.set_width("10e-6")
-        # ****************************************************************
-        # channel C - Scope trigger
-        # state on
-        self.DDG_channel_3.set_state("OFF")
-        # channel C SYNC channel B
-        self.DDG_channel_3.set_sync_channel("CHB")
-        # set channel C delay: 0
-        self.DDG_channel_3.set_delay("0")
-        # set channel C width to 10e-6
-        self.DDG_channel_3.set_width("10e-6")
-        # ****************************************************************
-        # channel D - NOTHING RIGHT NOW
-        # state on
-        self.DDG_channel_4.set_state("OFF")
-        # channel C SYNC channel B
-        self.DDG_channel_4.set_sync_channel("CHB")
-        # set channel C delay: 0
-        self.DDG_channel_4.set_delay("0")
-        # set channel C width to 10e-6
-        self.DDG_channel_4.set_width("10e-6")
-        # ****************************************************************
-        # channel E - ablation flashlamp
-        # state off
-        self.DDG_channel_5.set_state("OFF")
-        # channel E SYNC channel T0
-        self.DDG_channel_5.set_sync_channel("T0")
-        # set channel E delay: 10e-3 
-        self.DDG_channel_5.set_delay("10e-3")
-        # set channel E width to 10e-6
-        self.DDG_channel_5.set_width("10e-6")
-        # ****************************************************************
-        # channel F - ablation Q-switch
-        # state off
-        self.DDG_channel_6.set_state("OFF")
-        # channel F SYNC channel E
-        self.DDG_channel_6.set_sync_channel("CHE")
-        # set channel F delay: 110e-6 
-        self.DDG_channel_6.set_delay("110e-6")
-        # set channel F width to 10e-6
-        self.DDG_channel_6.set_width("10e-6")
-        # ****************************************************************
-        # channel G - nozzle
-        # state oFF
-        self.DDG_channel_7.set_state("OFF")
-        self.DDG_channel_7.set_sync_channel("CHF")
-        self.DDG_channel_7.set_delay("-460e-6")
-        self.DDG_channel_7.set_width("250e-6")
-        # ****************************************************************
-        # channel H - PMT switch
-        self.DDG_channel_8.set_state("OFF")
-        self.DDG_channel_8.set_sync_channel("CHB")
-        self.DDG_channel_8.set_delay("-680e-9")
-        self.DDG_channel_8.set_width("1e-6")
-
-    # All channel ON 
-    def DDG_Start(self):
-        self.DDG_channel_3.set_state("ON")
-        self.DDG_channel_5.set_state("ON")
-        self.DDG_channel_6.set_state("ON")
-        self.DDG_channel_7.set_state("ON")
-        self.DDG_channel_8.set_state("ON")
-
-    # channel 1 & 2 ON
-    # channel 3 & 5 & 6 & 7 & 8 OFF
-    def DDG_End(self):
-        self.DDG_channel_3.set_state("OFF")
-        self.DDG_channel_5.set_state("OFF")
-        self.DDG_channel_6.set_state("OFF")
-        self.DDG_channel_7.set_state("OFF")
-        self.DDG_channel_8.set_state("OFF")
 
 
 def create_folder (base_path, prefix):
@@ -524,27 +147,32 @@ while True:
 
             # DDG >> start
             if (parts[0] == "start"): 
-                ddg.DDG_Start()
+                ddg.DDG_Start(info_dict)
                 ddg_response = "DDG_START"
                 s_connection.sendall(ddg_response.encode('utf-8'))
 
             # DDG >> end
             elif (parts[0] == "end"):
-                ddg.DDG_End()
+                ddg.DDG_End(info_dict)
                 ddg_response = "DDG_END"
                 s_connection.sendall(ddg_response.encode('utf-8'))
 
-            # "DDG >> channel_7, delay, -520e-6"
+            # "DDG >> 7, delay, -520e-6"                
             else:
                 channel = parts[0]
-                # print(f"DDG_{channel}")
-                channel_instance = getattr(ddg, f'DDG_{channel}')
+                channel = int(channel)
+                # Access the channel instance directly from the channels dictionary
+                channel_instance = ddg.channels[channel]
+
                 action = parts[1]
                 # Get the method (action)
                 method = getattr(channel_instance, f'set_{action}')
+               
                 value = parts[2]
                 # Call the method with value as the argument
-                method(str(value))
+                # ddg.channels[1].set_state("ON", ddg.connection, info_dict)
+                method(str(value), ddg.connection, info_dict)
+
                 ddg_response = "DDG_DONE"
                 s_connection.send(ddg_response.encode('utf-8')) 
 
@@ -556,7 +184,7 @@ while True:
                 print("In function - getData")
                 scope.SCOPE_StartToAcquireData()
                 print("Done - scope.SCOPE_StartToAcquireData()")
-                scope.SCOPE_GetandUpdate_Data()
+                scope.SCOPE_GetandUpdate_Data(info_dict)
                 print ("Done - scope.SCOPE_GetandUpdate_Data()")
                 file_path = create_file(folder_path)
                 write_dict_to_file(file_path, info_dict)
