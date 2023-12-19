@@ -54,4 +54,10 @@ server response: "SCOPE_DATA_DONE"
 client message: "Scope >> BackToNormalMode"  
 server response: "SCOPE_NORMAL_MODE"  
 
+### Dye Laser:
+#### Message Examples:
+client message: "DYE_LASER >> setwavelength, 622"  
+server response: "DYE_WAVELENGTH_DONE"
+client message: "DYE_LASER >> close"  
+server response: "DYE_LASER_CLOSE"
 
