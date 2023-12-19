@@ -19,9 +19,9 @@ When we send messages to the server, we need to confirm the task is done before 
 def send_message_to_server(self, table_connection, message, confirmation)
 In this function, we have "message" which is the msg we send to devices & "confirmation" message as the feedback from the device to confirm that the work has been done!
 
-### *************  
+### **************************  
 ### Arduino:
-### *************  
+### **************************  
 #### Message Examples:
 message = "SHUTTER >> 2_on"  
 confirmation = "WAVEMETER_SHUTTER_ON"  
@@ -36,9 +36,9 @@ confirmation = "UV_SHUTTER_ON"
 message = "SHUTTER >> 4_off"  
 confirmation = "UV_SHUTTER_OFF"  
 
-### *************  
+### **************************  
 ### DDG (8 channels):
-### *************  
+### **************************  
 1. set_state(self, state_status, connection, info_dict)  
 2. set_delay(self, delay_value, connection, info_dict)  
 3. set_sync_channel(self, channel, connection, info_dict)  
@@ -51,19 +51,28 @@ server responses message: "DDG_END"
 the client sends a message: "DDG >> 7, delay, -520e-6" (channel NO., action, value)  
 server responses message: "DDG_DONE"  
 
+### **************************  
 ### Scope (4 channels):
+### **************************  
 #### Message Examples:
 client message: "Scope >> getData"  
 server response: "SCOPE_DATA_DONE"  
 client message: "Scope >> BackToNormalMode"  
 server response: "SCOPE_NORMAL_MODE"  
 
+### **************************  
 ### Dye Laser:
-#### Message Examples:
+### **************************  
+#### Message Examples:  
 client message: "DYE_LASER >> setwavelength, 622"  
 server response: "DYE_WAVELENGTH_DONE"  
 client message: "DYE_LASER >> close"  
 server response: "DYE_LASER_CLOSE"  
 
-
+### **************************  
+### Wavemeter:
+### **************************  
+#### Message Examples:  
+client message: "WAVEMETER >> read"  
+server response: "TABLE1_DONE"  
 
