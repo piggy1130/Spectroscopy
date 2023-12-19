@@ -62,7 +62,7 @@ while True:
         if (function_name == "WAVEMETER"):
             parts = function_parameter.split(",")
 
-            # DDG >> start
+            # WAVEMETER >> read
             if (parts[0] == "read"): 
                 #send wavelength to table1
                 wavelength_value = wavemeter.Read_Wavemeter()

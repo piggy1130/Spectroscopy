@@ -31,3 +31,4 @@ class Dye_Laser:
 
     def close_laser(self):
         self.laser.close()
+
