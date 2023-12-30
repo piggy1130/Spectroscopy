@@ -24,17 +24,12 @@ In this function, we have "message" which is the msg we send to devices & "confi
 ### **************************  
 #### Message Examples:
 message = "SHUTTER >> 2_on"  
-confirmation = "WAVEMETER_SHUTTER_ON"  
 message = "SHUTTER >> 2_off"  
-confirmation = "WAVEMETER_SHUTTER_OFF"  
 message = "SHUTTER >> 3_on"  
-confirmation = "VIS_SHUTTER_ON"  
 message = "SHUTTER >> 3_off"  
-confirmation = "VIS_SHUTTER_OFF"  
 message = "SHUTTER >> 4_on"  
-confirmation = "UV_SHUTTER_ON"  
 message = "SHUTTER >> 4_off"  
-confirmation = "UV_SHUTTER_OFF"  
+ 
 
 ### **************************  
 ### DDG (8 channels):
@@ -45,34 +40,29 @@ confirmation = "UV_SHUTTER_OFF"
 4. set_width(self, width_val, connection, info_dict)  
 #### Message Examples:
 the client sends a message: "DDG >> start"  
-server responses message: "DDG_START"  
 the client sends a message: "DDG >> end"  
-server responses message: "DDG_END"  
 the client sends a message: "DDG >> 7, delay, -520e-6" (channel NO., action, value)  
-server responses message: "DDG_DONE"  
+
 
 ### **************************  
 ### Scope (4 channels):
 ### **************************  
 #### Message Examples:
 client message: "Scope >> getData"  
-server response: "SCOPE_DATA_DONE"  
 client message: "Scope >> BackToNormalMode"  
-server response: "SCOPE_NORMAL_MODE"  
+
 
 ### **************************  
 ### Dye Laser:
 ### **************************  
 #### Message Examples:  
-client message: "DYE_LASER >> setwavelength, 622"  
-server response: "DYE_WAVELENGTH_DONE"  
+client message: "DYE_LASER >> setwavelength, 622"    
 client message: "DYE_LASER >> close"  
-server response: "DYE_LASER_CLOSE"  
+
 
 ### **************************  
 ### Wavemeter:
 ### **************************  
 #### Message Examples:  
-client message: "WAVEMETER >> read"  
-server response: "TABLE1_DONE"  
+client message: "WAVEMETER >> read"    
 
