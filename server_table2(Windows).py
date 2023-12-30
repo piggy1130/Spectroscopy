@@ -6,15 +6,10 @@ from datetime import datetime
 import os
 #import numpy as np
 import pickle
-from wavemeter_class import WAVEMETER
+from WAVEMETER_class import WAVEMETER
 
 BUFFER_SIZE = 1024
 info_dict = {}
-
-# def Work_Done():
-#     Done_response = "Table2_windows_DONE"
-#     client_socket.send(Done_response.encode('utf-8'))
-
 
 def Command_parse_run(command):
     # parse input parameters
@@ -27,7 +22,6 @@ def Command_parse_run(command):
         command_func_parameter = None
     return command_func_name, command_func_parameter
     
-
 
 # *************************************************************************
 #                Setup & Connection
