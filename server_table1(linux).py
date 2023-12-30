@@ -16,10 +16,8 @@ from SCOPE_class import *
 from DYE_LASER import Dye_Laser
 from SHUTTER_class import SHUTTER
 from DDG_class import *
-from document_class import DOCUMENT
-from wavemeter_class import WAVEMETER
-
-
+from DOCUMENT_class import DOCUMENT
+from WAVEMETER_class import WAVEMETER
 
 def Command_parse_run(command):
     # parse input parameters
@@ -31,61 +29,6 @@ def Command_parse_run(command):
         command_func_name = None
         command_func_parameter = None
     return command_func_name, command_func_parameter
-
-# def Check_Work_Done (table_connection, confirmation):
-#     while True:
-#         received_msg = table_connection.recv(BUFFER_SIZE).strip() #received the data in binary
-#         decoded_received_data = received_msg.decode('utf-8') #change data from binary to string
-#         if (decoded_received_data == confirmation):
-#             print("Received from server: ", decoded_received_data)
-#             break
-
-# def send_message_to_server(table_connection, message, confirmation):
-#     # s_table1_linux.sendall(message.encode('utf-8'))
-#     table_connection.sendall(message.encode('utf-8'))
-#     Check_Work_Done(table_connection,confirmation)
-
-# def create_folder (base_path, prefix):
-#     # Get today's date in MMDD format
-#     date_str = datetime.now().strftime('%m%d')
-#     # Initialize folder number
-#     folder_num = 1
-#     # Construct folder name and path
-#     folder_name = f"{prefix}_{date_str}_v{folder_num}"
-#     folder_path = os.path.join(base_path, folder_name)
-#     # Check if the folder exists, if it does, create new one with an incremented suffix
-#     while os.path.exists(folder_path):
-#         folder_num += 1
-#         folder_name = f"{prefix}_{date_str}_v{folder_num}"
-#         folder_path = os.path.join(base_path, folder_name)
-#     os.makedirs(folder_path, exist_ok=True)
-#     print(f'Created folder: {folder_path}')
-#     return folder_path
-
-# def create_file (folder_path):
-#     # Define file prefix and extension
-#     file_prefix = 'file_'
-#     extension = '.pkl'
-#     # Initialize file number
-#     file_num = 1
-#     # Construct new file path
-#     new_file_path = os.path.join(folder_path, f"{file_prefix}{file_num}{extension}")    
-#     # Check if the file exists, if it does, create new one with an incremented suffix
-#     while os.path.isfile(new_file_path):
-#         file_num += 1
-#         new_file_path = os.path.join(folder_path, f"{file_prefix}{file_num}{extension}")
-    
-#     filename = f"{file_prefix}{file_num}{extension}"
-#     info_dict["filename"] = filename
-#     # Create a new file
-#     open(new_file_path, 'a').close()
-#     print(f'Created file: {new_file_path}')
-#     return new_file_path
-
-# def write_dict_to_file (file_path, dictionary):
-    # with open(file_path, 'wb') as f:
-    #     pickle.dump(dictionary, f)
-
 
 
 # *************************************************************************
@@ -158,13 +101,13 @@ while True:
             # DDG >> start
             if (parts[0] == "start"): 
                 ddg.DDG_Start(info_dict)
-                ddg_response = "DDG_START"
+                ddg_response = "DDG >> start"
                 s_connection.sendall(ddg_response.encode('utf-8'))
 
             # DDG >> end
             elif (parts[0] == "end"):
                 ddg.DDG_End(info_dict)
-                ddg_response = "DDG_END"
+                ddg_response = "DDG >> end"
                 s_connection.sendall(ddg_response.encode('utf-8'))
 
             # "DDG >> 7, delay, -520e-6"                
@@ -182,7 +125,7 @@ while True:
                 # ddg.channels[1].set_state("ON", ddg.connection, info_dict)
                 method(str(info), ddg.connection, info_dict)
 
-                ddg_response = "DDG_DONE"
+                ddg_response = str(decoded_received_command)
                 s_connection.send(ddg_response.encode('utf-8')) 
 
         elif (function_name == "SCOPE"):
@@ -195,15 +138,15 @@ while True:
                 print("Done - scope.SCOPE_StartToAcquireData()")
                 scope.SCOPE_GetandUpdate_Data(info_dict)
                 print ("Done - scope.SCOPE_GetandUpdate_Data()")
-                file_path = create_file(folder_path)
-                write_dict_to_file(file_path, info_dict)
-                scope_response = "SCOPE_DATA_DONE"
+                file_path = document.create_file(new_folder_path)
+                document.write_dict_to_file(file_path, info_dict)
+                scope_response = str(decoded_received_command)
                 s_connection.send(scope_response.encode('utf-8')) 
 
             # Scope >> BackToNormalMode
             if (parts[0] =="BackToNormalMode"):
                 scope.SCOPE_BackToNormalMode()
-                scope_response = "SCOPE_NORMAL_MODE"
+                scope_response = str(decoded_received_command)
                 s_connection.send(scope_response.encode('utf-8')) 
 
         elif (function_name == "DYE_LASER"):
@@ -212,35 +155,35 @@ while True:
             # DYE_LASER >> setwavelength, 622
             if (parts[0] == "setwavelength"):
                 dye_laser.set_wavelength(parts[1])
-                dye_laser_response = "DYE_WAVELENGTH_DONE"
+                dye_laser_response = str(decoded_received_command)
                 s_connection.send(dye_laser_response.encode('utf-8'))
 
             # DYE_LASER >> close
             elif (parts[0] == "close"):
                 dye_laser.close_laser()
-                dye_laser_response = "DYE_LASER_CLOSE"
+                dye_laser_response = str(decoded_received_command)
                 s_connection.send(dye_laser_response.encode('utf-8'))
 
         elif (function_name == "SHUTTER"):
             msg = str(function_parameter)
             shutter.control_shutter(msg)
             if (msg == "2_on"):
-                shutter_response = "WAVEMETER_SHUTTER_ON"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))
             elif (msg == "2_off"):
-                shutter_response = "WAVEMETER_SHUTTER_OFF"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))
             elif (msg == "3_on"):
-                shutter_response = "VIS_SHUTTER_ON"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))               
             elif (msg == "3_off"):
-                shutter_response = "VIS_SHUTTER_OFF"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))  
             elif (msg == "4_on"):
-                shutter_response = "UV_SHUTTER_ON"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))               
             elif (msg == "4_off"):
-                shutter_response = "UV_SHUTTER_OFF"
+                shutter_response = str(decoded_received_command)
                 s_connection.send(shutter_response.encode('utf-8'))  
 
         elif (function_name == "WAVEMETER"):
@@ -253,7 +196,7 @@ while True:
             info_dict["wavelength_in_wavemeter"] = received_wavelength
             
             #tell client that wavemeter part is done
-            msg_send_client = "TABLE1_DONE"
+            msg_send_client = str(decoded_received_command)
             s_connection.send(msg_send_client.encode('utf-8')) 
 
         # save ditionary into file
