@@ -20,7 +20,7 @@ def send_message_to_server(self, table_connection, message, confirmation)
 In this function, we have "message" which is the msg we send to devices & "confirmation" message as the feedback from the device to confirm that the work has been done!
 
 ### **************************  
-### Arduino:
+### Arduino (Shutter Control):  
 ### **************************  
 #### Message Examples:
 message = "SHUTTER >> 2_on"  
